@@ -7,6 +7,7 @@
     export PROSODY_DOMAIN="example.com"
 
 ## Create certificate
+    mkdir resources/etc/prosody/certs
     openssl req -nodes -newkey rsa:4096 -keyout resources/etc/prosody/certs/${PROSODY_DOMAIN}.key -out resources/etc/prosody/certs/${PROSODY_DOMAIN}.csr -subj "/C=DE/ST=Frankfurt/L=Frankfurt/O=IT Security/OU=IT Department/CN=${PROSODY_DOMAIN}"
     openssl x509 -req -days 3650 -in resources/etc/prosody/certs/${PROSODY_DOMAIN}.csr -signkey resources/etc/prosody/certs/${PROSODY_DOMAIN}.key -out resources/etc/prosody/certs/${PROSODY_DOMAIN}.crt
     chmod 644 resources/etc/prosody/certs/${PROSODY_DOMAIN}.key
