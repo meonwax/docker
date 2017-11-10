@@ -28,8 +28,9 @@ log = { "*console" }
 
 http_default_host = "default"
 
-VirtualHost "default"
+-- Set the correct domain name and certificates here
+VirtualHost "example.com" 
 ssl = {
-    key = "/etc/prosody/certs/default.key",
-    certificate = "/etc/prosody/certs/default.crt"
+    key = "/etc/prosody/certs/example.com.key",
+    certificate = "/etc/prosody/certs/example.com.crt"
 }
