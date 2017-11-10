@@ -3,6 +3,10 @@
 ## Set docker user id
     export DOCKER_ID_USER="username"
 
+## Create certificate
+    openssl req -nodes -newkey rsa:4096 -keyout resources/etc/prosody/certs/default.key -out resources/etc/prosody/certs/default.csr -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=domain.name"
+    openssl x509 -req -days 365 -in resources/etc/prosody/certs/default.csr -signkey resources/etc/prosody/certs/default.key -out resources/etc/prosody/certs/default.crt
+
 ## Build image
     docker build -t $DOCKER_ID_USER/prosody .
 
