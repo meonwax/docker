@@ -4,21 +4,21 @@
     export DOCKER_ID_USER="username"
 
 ## Set domain name
-    export DOMAIN="example.com"
+    export PROSODY_DOMAIN="example.com"
 
 ## Create certificate
-    openssl req -nodes -newkey rsa:4096 -keyout resources/etc/prosody/certs/${DOMAIN}.key -out resources/etc/prosody/certs/${DOMAIN}.csr -subj "/C=DE/ST=Frankfurt/L=Frankfurt/O=IT Security/OU=IT Department/CN=${DOMAIN}"
-    openssl x509 -req -days 3650 -in resources/etc/prosody/certs/${DOMAIN}.csr -signkey resources/etc/prosody/certs/${DOMAIN}.key -out resources/etc/prosody/certs/${DOMAIN}.crt
-    chmod 644 resources/etc/prosody/certs/${DOMAIN}.key
+    openssl req -nodes -newkey rsa:4096 -keyout resources/etc/prosody/certs/${PROSODY_DOMAIN}.key -out resources/etc/prosody/certs/${PROSODY_DOMAIN}.csr -subj "/C=DE/ST=Frankfurt/L=Frankfurt/O=IT Security/OU=IT Department/CN=${PROSODY_DOMAIN}"
+    openssl x509 -req -days 3650 -in resources/etc/prosody/certs/${PROSODY_DOMAIN}.csr -signkey resources/etc/prosody/certs/${PROSODY_DOMAIN}.key -out resources/etc/prosody/certs/${PROSODY_DOMAIN}.crt
+    chmod 644 resources/etc/prosody/certs/${PROSODY_DOMAIN}.key
 
 ## Edit configuration
-   vim resources/etc/prosody/prosody.cfg.lua
+    vim resources/etc/prosody/prosody.cfg.lua
 
 ## Build image
-    docker build -t $DOCKER_ID_USER/prosody .
+    docker build -t ${DOCKER_ID_USER}/prosody .
 
 ## Run container 
-    docker run -d -p 5222:5222 -v prosody:/var/lib/prosody $DOCKER_ID_USER/prosody
+    docker run -d -p 5222:5222 -v prosody:/var/lib/prosody ${DOCKER_ID_USER}/prosody
 
 ## Create XMPP user
     docker exec -i -t <containername> /bin/sh
@@ -26,4 +26,4 @@
 
 ## Publish to docker hub (optional)
     docker login
-    docker push $DOCKER_ID_USER/prosody
+    docker push ${DOCKER_ID_USER}/prosody
